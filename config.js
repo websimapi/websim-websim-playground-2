@@ -1,6 +1,6 @@
 export const config = {
-    appName: "Websim Image & Theme Gen", 
-    description: "Generate an image using AI, select an aspect ratio, and customize the page theme!", 
+    appName: "Websim Image & Theme Gen",
+    description: "Generate images, customize themes, and add custom JS plugins!",
     aspectRatios: [
         { label: "Square (1:1)", value: "1:1" },
         { label: "Landscape (16:9)", value: "16:9" },
@@ -12,5 +12,8 @@ export const config = {
     ],
     defaultAspectRatio: "1:1",
     imageCollectionType: "generated_image_v1",
-    themeStateKey: "currentThemeCSS_v1" 
+    themeStateKey: "currentThemeCSS_v1",
+    pluginCollectionType: "custom_plugin_v2",
+    enabledPluginsStorageKey: "enabledPlugins_v1",
+    maxPluginFixAttempts: 3,
 };

@@ -277,3 +277,195 @@ button:disabled {
     display: block;
     transition: color 0.5s ease; /* Add transition */
 }
+
+/* --- Plugin Section Styles --- */
+.plugin-section {
+    margin-top: 3rem;
+    border-top: 1px solid #ecf0f1; /* Separator */
+    padding-top: 1.5rem;
+    transition: border-color 0.5s ease; /* Add transition */
+}
+
+.plugin-creator-container, .plugin-list-container {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    border: 1px solid #e9ecef;
+    transition: background-color 0.5s ease, border-color 0.5s ease; /* Add transition */
+}
+
+.plugin-form .input-group {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: stretch; /* Make children full width */
+    gap: 1rem;
+}
+
+.plugin-form input[type="text"],
+.plugin-form textarea {
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Add transition */
+    width: 100%; /* Ensure full width */
+    box-sizing: border-box; /* Include padding/border in width */
+    min-width: unset; /* Override previous min-width */
+}
+.plugin-form textarea {
+    min-height: 150px; /* Taller text area */
+    font-family: monospace; /* Use monospace font for code */
+    resize: vertical; /* Allow vertical resize */
+}
+.plugin-form input[type="text"]::placeholder,
+.plugin-form textarea::placeholder {
+    color: #aaa;
+    transition: color 0.3s ease; /* Add transition */
+}
+
+.plugin-form button {
+    align-self: flex-end; /* Align button to the right */
+}
+
+.plugin-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.plugin-item {
+    background-color: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: 6px;
+    border: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    transition: background-color 0.5s ease, border-color 0.5s ease; /* Add transition */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+.plugin-item-info {
+    flex-grow: 1;
+    min-width: 200px; /* Prevent excessive shrinking */
+}
+
+.plugin-item-info .plugin-name {
+    font-weight: 600;
+    color: #333;
+    display: block; /* Ensure block display */
+    margin-bottom: 0.25rem; /* Space below name */
+    transition: color 0.5s ease; /* Add transition */
+}
+
+.plugin-item-info .plugin-creator {
+    font-size: 0.85rem;
+    color: #777;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.5s ease; /* Add transition */
+}
+.plugin-item-info .plugin-creator .avatar {
+     width: 20px;
+     height: 20px;
+     border-radius: 50%;
+     object-fit: cover;
+     border: 1px solid #ddd;
+     transition: border-color 0.5s ease; /* Add transition */
+ }
+
+.plugin-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0; /* Prevent controls from shrinking */
+}
+
+.plugin-controls .toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px; /* Increased width */
+    height: 28px; /* Increased height */
+}
+
+.plugin-controls .toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.plugin-controls .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 28px; /* Fully rounded */
+}
+
+.plugin-controls .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px; /* Smaller inner circle */
+    width: 20px; /* Smaller inner circle */
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.plugin-controls input:checked + .slider {
+    background-color: #2196F3; /* Blue when checked */
+}
+
+.plugin-controls input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+.plugin-controls input:checked + .slider:before {
+    transform: translateX(22px); /* Adjusted translation */
+}
+
+.plugin-controls .delete-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 12px; /* Smaller padding */
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem; /* Smaller font */
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    line-height: 1; /* Ensure consistent height */
+}
+.plugin-controls .delete-button:hover:not(:disabled) {
+    background-color: #c0392b;
+}
+.plugin-controls .delete-button:disabled {
+    background-color: #cccccc;
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.plugin-warning {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; /* Add transition */
+}
