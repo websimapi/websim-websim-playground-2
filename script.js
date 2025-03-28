@@ -349,14 +349,14 @@ const App = () => {
                 ],
             });
             generatedCode = completion.content?.trim();
-            if (!generatedCode} && generatedCode !== finalCode) {
+            if (generatedCode && generatedCode !== finalCode) { 
                 console.log("Initial code generated:", generatedCode.substring(0, 100) + "...");
                 finalCode = generatedCode; 
 
             } catch (genError) {
                 console.error("Error generating plugin code:", genError);
                 setPluginError(`Failed to generate code from prompt: ${genError.message}`);
-                setIsLoadingPlugin)(false);
+                setIsLoadingPlugin(false);
                 return;
             }
 
@@ -481,7 +481,7 @@ const App = () => {
         console.log("Evaluating enabled plugins...");
         enabledPluginIds.forEach(pluginId => {
             if (!executedPluginFunctions.current[pluginId]) {
-                const plugin} = allPlugins.find(p => p.id === pluginId);
+                const plugin = allPlugins.find(p => p.id === pluginId);
                 if (plugin && plugin.code) {
                     if (plugin.code.trim().startsWith("// Request is unclear")) {
                         console.warn(`Skipping execution of plugin ${plugin.name} (${pluginId}) because AI indicated request was unclear.`);
@@ -497,11 +497,10 @@ const App = () => {
                     } catch (error) {
                         console.error(`Error executing plugin ${plugin.name} (${pluginId}):`, error);
                         delete executedPluginFunctions.current[pluginId];
-                        setPluginError(prev => `${prev ? prev + '\n' : ''}Error executing plugin "${plugin.name})": ${error.message}`);
+                        setPluginError(prev => `${prev ? prev + '\n' : ''}Error executing plugin "${plugin?.name || pluginId}": ${error.message}`);
                     }
                 } else {
                     console.warn(`Plugin code for enabled plugin ${pluginId} not found or plugin deleted.`);
-                    delete executedPluginFunctions.current[pluginId];
                 }
             } else {
                 console.log(`Plugin ${pluginId} already executed, skipping.`);
@@ -570,7 +569,7 @@ const App = () => {
                         <img src={currentImageUrl} alt="Most recently generated image" />
                     </div>
                 </div>
-            )
+            )}
 
 
             {/* --- Theme Generation & Selection --- */}
@@ -683,7 +682,7 @@ const App = () => {
                     {isRoomInitialized && !isPluginListLoading && allPlugins.length === 0 && <p>No custom plugins created yet.</p>}
                     {isRoomInitialized && !isPluginListLoading && allPlugins.length > 0 && (
                         <ul className="plugin-list">
-                            {allPlugins).map((plugin) => (
+                            {allPlugins.map((plugin) => (
                                 <li key={plugin.id} className="plugin-item">
                                     <div className="plugin-item-info">
                                         <strong className="plugin-name">{plugin.name}</strong>
@@ -709,12 +708,12 @@ const App = () => {
                                                 className="delete-button"
                                                 onClick={() => handleDeletePlugin(plugin.id)}
                                                 title="Delete Plugin"
-                                                disabled={!isRoomInitialized}}
+                                                disabled={!isRoomInitialized}
                                             >
                                                 Delete
                                             </button>
                                         )}
-                                        <label className="toggle-switch" title={enabledPluginIds.has(plugin.id") ? 'Disable Plugin' : 'Enable Plugin'}>
+                                        <label className="toggle-switch" title={enabledPluginIds.has(plugin.id) ? 'Disable Plugin' : 'Enable Plugin'}>
                                             <input
                                                 type="checkbox"
                                                 checked={enabledPluginIds.has(plugin.id)}
@@ -740,7 +739,7 @@ const App = () => {
             {isRoomInitialized && !isGalleryLoading && galleryImages.length > 0 && (
                 <div className="gallery-grid">
                     {galleryImages.map((imgRecord) => (
-                        <div key={imgRecord.id"} className="gallery-item">
+                        <div key={imgRecord.id} className="gallery-item">
                             <img src={imgRecord.imageUrl} alt={`Generated image for: ${imgRecord.prompt}`} loading="lazy" />
                             <div className="gallery-item-info">
                                 <img
