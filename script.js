@@ -18,6 +18,10 @@ const App = () => {
         setImageUrl(null); // Clear previous image
         try {
             console.log("Generating image for prompt:", prompt);
+            // Make sure websim object is available globally
+            if (typeof websim === 'undefined' || !websim.imageGen) {
+                throw new Error("Websim image generation tool is not available.");
+            }
             const result = await websim.imageGen({ prompt });
             console.log("Image generated:", result);
             if (result && result.url) {
@@ -27,35 +31,48 @@ const App = () => {
             }
         } catch (err) {
             console.error("Error generating image:", err);
-            setError(`Error generating image: ${err.message || err}`);
+            // Display a more user-friendly error message
+            setError(`Error: ${err.message || 'An unknown error occurred during image generation.'}`);
         } finally {
             setIsLoading(false);
         }
     };
 
+    // Added aria-label for accessibility
+    // Added key prop for potential future list rendering if needed, though not strictly necessary here.
     return (
-        <div>
+        <div key="image-generator">
             <h1>{config.appName}</h1>
             <p>{config.description}</p>
-            <div>
+            <div className="input-group">
                 <input
                     type="text"
                     value={prompt}
                     onChange={(e) => setPrompt(e.target.value)}
                     placeholder="Enter your image prompt"
                     disabled={isLoading}
+                    aria-label="Image prompt input"
                 />
-                <button onClick={handleGenerateImage} disabled={isLoading}>
+                <button onClick={handleGenerateImage} disabled={isLoading || !prompt.trim()} aria-live="polite">
                     {isLoading ? 'Generating...' : 'Generate Image'}
                 </button>
             </div>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            {isLoading && <p>Loading...</p>}
-            {imageUrl && <img src={imageUrl} alt="Generated Image" />}
+            {error && <p className="error-message" style={{ color: 'red' }}>{error}</p>}
+            {/* More explicit loading indicator */}
+            {isLoading && <div className="loading-indicator"><p>Loading...</p></div>} 
+            {imageUrl && (
+                <div className="image-container">
+                    <img src={imageUrl} alt="Generated Image based on prompt" />
+                 </div>
+            )}
         </div>
     );
 };
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
-
+const rootElement = document.getElementById('root');
+if (rootElement) {
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(React.createElement(App)); // Use React.createElement for clarity without JSX outside component scope
+} else {
+    console.error("Failed to find the root element");
+}
