@@ -1,74 +1,98 @@
+/* Base styles - these might be overridden by the generated theme */
 body {
-    font-family: sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; /* System font stack */
     display: flex;
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
-    background-color: #f4f7f6; 
-    padding: 2rem 1rem; 
+    background-color: #f4f7f6;
+    padding: 2rem 1rem;
     box-sizing: border-box;
+    transition: background-color 0.5s ease; /* Add transition */
 }
 
 #root {
     background-color: white;
     padding: 2rem;
-    border-radius: 12px; 
+    border-radius: 12px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 95%; 
-    max-width: 900px; 
+    width: 95%;
+    max-width: 900px;
     margin: 0 auto;
+    transition: background-color 0.5s ease, box-shadow 0.5s ease; /* Add transition */
 }
 
-h1 {
-    color: #2c3e50; 
-    margin-top: 0;
-    margin-bottom: 0.5rem;
+h1, h2, h3 {
+    color: #2c3e50;
+    margin-bottom: 0.75rem; /* Consistent bottom margin */
+    transition: color 0.5s ease; /* Add transition */
 }
-
-h2 {
-    color: #34495e; 
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+h1 { 
+    margin-top: 0; 
+}
+h2 { 
+    margin-top: 2.5rem; 
     border-bottom: 1px solid #ecf0f1; 
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.5rem; 
 }
+h3 { 
+    margin-top: 1rem; 
+    font-size: 1.1em; 
+    color: #34495e;
+}
+
 
 p {
-    color: #7f8c8d; 
+    color: #7f8c8d;
     margin-bottom: 1.5rem;
     line-height: 1.6;
+    transition: color 0.5s ease; /* Add transition */
 }
 
+/* --- Controls --- */
 .controls-container {
     background-color: #f8f9fa;
     padding: 1.5rem;
     border-radius: 8px;
     margin-bottom: 2rem;
     border: 1px solid #e9ecef;
+    transition: background-color 0.5s ease, border-color 0.5s ease; /* Add transition */
 }
+/* Specific spacing for theme controls */
+.theme-controls {
+    margin-top: 1rem; /* Add some space above theme controls */
+    margin-bottom: 1rem;
+}
+
 
 .input-group {
     display: flex;
     justify-content: center;
-    align-items: stretch; 
+    align-items: stretch;
     gap: 0.75rem;
     flex-wrap: wrap;
 }
 
 input[type="text"],
 select {
-    padding: 12px 15px; 
+    padding: 12px 15px;
     border: 1px solid #ced4da;
     border-radius: 4px;
     font-size: 1rem;
     flex-grow: 1;
-    min-width: 250px; 
+    min-width: 200px; /* Adjusted min-width */
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Add transition */
+}
+input[type="text"]::placeholder {
+    color: #aaa;
+    transition: color 0.3s ease; /* Add transition */
 }
 
+
 select {
-    flex-grow: 0; 
+    flex-grow: 0;
     min-width: 150px;
     cursor: pointer;
     background-color: white;
@@ -78,70 +102,81 @@ button {
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 12px 25px; 
+    padding: 12px 25px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 1rem;
-    font-weight: 500; 
-    transition: background-color 0.3s ease, opacity 0.3s ease, transform 0.1s ease;
-    white-space: nowrap; 
+    font-weight: 500;
+    transition: background-color 0.3s ease, opacity 0.3s ease, transform 0.1s ease, color 0.3s ease; /* Add transition */
+    white-space: nowrap;
 }
 
-button:hover {
+button:hover:not(:disabled) { /* Only apply hover when not disabled */
     background-color: #0056b3;
+    opacity: 0.9; /* Slight fade on hover */
 }
 
-button:active {
-    transform: translateY(1px); 
+button:active:not(:disabled) { /* Only apply active when not disabled */
+    transform: translateY(1px);
 }
 
 button:disabled {
     background-color: #cccccc;
+    color: #666; /* Darker text on disabled button */
     cursor: not-allowed;
     opacity: 0.7;
 }
 
+/* --- Messages & Indicators --- */
 .error-message {
-    color: #e74c3c !important; 
+    color: #e74c3c !important; /* Use important if needed to override themes */
     background-color: #fdeded;
     border: 1px solid #f5c6cb;
     padding: 10px 15px;
     border-radius: 4px;
-    font-weight: 500; 
+    font-weight: 500;
     margin-top: 1.5rem;
-    display: inline-block; 
+    margin-bottom: 1rem; /* Add bottom margin */
+    display: inline-block;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; /* Add transition */
 }
 
 .loading-indicator {
     margin-top: 1.5rem;
+    margin-bottom: 1rem; /* Add bottom margin */
     font-style: italic;
     color: #555;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    transition: color 0.5s ease; /* Add transition */
 }
 
 .spinner {
-    border: 4px solid #f3f3f3; 
-    border-top: 4px solid #3498db; 
+    border: 4px solid rgba(0, 0, 0, 0.1); /* Lighter base border */
+    border-top: 4px solid #3498db;
     border-radius: 50%;
     width: 20px;
     height: 20px;
     animation: spin 1s linear infinite;
+    transition: border-color 0.5s ease; /* Add transition */
 }
+
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
+/* --- Image Display --- */
 .current-image-section {
     margin-top: 2rem;
+    margin-bottom: 2rem; /* Add bottom margin */
 }
 
 .image-container {
-    margin-top: 1rem;
+    margin-top: 0.5rem; /* Reduced top margin */
     max-width: 100%;
     overflow: hidden;
 }
@@ -151,18 +186,20 @@ button:disabled {
     max-width: 100%;
     height: auto;
     margin: 0 auto;
-    border-radius: 8px; 
+    border-radius: 8px;
     border: 1px solid #eee;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.5s ease, box-shadow 0.5s ease; /* Add transition */
 }
 
+/* --- Gallery --- */
 .gallery-section {
     margin-top: 3rem;
 }
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.5rem;
     margin-top: 1rem;
 }
@@ -172,7 +209,7 @@ button:disabled {
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
     overflow: hidden;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.5s ease; /* Add transition */
     display: flex;
     flex-direction: column;
 }
@@ -184,10 +221,11 @@ button:disabled {
 
 .gallery-item img {
     width: 100%;
-    height: 200px; 
-    object-fit: cover; 
+    height: 200px;
+    object-fit: cover;
     display: block;
     border-bottom: 1px solid #eee;
+    transition: border-color 0.5s ease; /* Add transition */
 }
 
 .gallery-item-info {
@@ -195,8 +233,9 @@ button:disabled {
     text-align: left;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem; 
-    flex-grow: 1; 
+    gap: 0.4rem; /* Slightly reduced gap */
+    flex-grow: 1;
+    transition: background-color 0.5s ease; /* Add transition */
 }
 
 .gallery-item-info .avatar {
@@ -208,29 +247,33 @@ button:disabled {
     margin-right: 0.5rem;
     border: 1px solid #ddd;
     object-fit: cover;
+    transition: border-color 0.5s ease; /* Add transition */
 }
 
 .gallery-item-info .username {
     font-weight: 600;
     color: #333;
     font-size: 0.9rem;
+    transition: color 0.5s ease; /* Add transition */
 }
 
 .gallery-item-info .prompt-preview {
     font-size: 0.85rem;
     color: #555;
-    margin: 0 0 0.5rem 0; 
+    margin: 0 0 0.5rem 0;
     line-height: 1.4;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    min-height: 2.8em; 
+    min-height: 2.8em; /* Ensures consistent height */
+    transition: color 0.5s ease; /* Add transition */
 }
 
 .gallery-item-info .details {
     font-size: 0.8rem;
     color: #888;
-    display: block; 
+    display: block;
+    transition: color 0.5s ease; /* Add transition */
 }
