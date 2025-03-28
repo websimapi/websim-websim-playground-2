@@ -1,3 +1,4 @@
+import { config } from './config.js';
 export const config = {
     appName: "Websim Image & Theme Gen",
     description: "Generate images, customize themes, and add custom JS plugins!",
@@ -12,8 +13,9 @@ export const config = {
     ],
     defaultAspectRatio: "1:1",
     imageCollectionType: "generated_image_v1",
-    themeStateKey: "currentThemeCSS_v1",
-    pluginCollectionType: "custom_plugin_v2",
+    themeStateKey: "currentThemeCSS_v1", // Stores the CSS of the *currently active* theme
+    themeCollectionType: "custom_theme_v1", // Stores records of generated themes
+    pluginCollectionType: "custom_plugin_v3", // Incremented version to include prompt
     enabledPluginsStorageKey: "enabledPlugins_v1",
     maxPluginFixAttempts: 3,
 };
